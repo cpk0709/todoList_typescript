@@ -11,8 +11,11 @@ const Todo = () => {
   const getEditTodoFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditTitle(e.target.value);
   };
-  // 리덕스의 todo 불러오기
+
+  // 리덕스의 todo 불러오기. 현시점 문제있음. onChange로 타이핑 하나하나 칠 때 마다 getEditTodoFrom 이 실행되면서 editTitle값이 변하면서 계속 리랜더링하게됨. 동시에 useSelector도 실행되면서 리덕스데이터도 계속 불러옴. 나중에 수정 필요(리덕스의 state를 불러오는 방법에서, api로 리스트를 불러오고 useEffect로 걸어둬야할거같음)
   const todoList = useSelector((store: RootState) => store.todo.list);
+  // console.log(todoList);
+
   // todo삭제
   const handleDeleteTodo = (todoId: number) => {
     dispatch(todoSlice.actions.deleteTodo(todoId));
